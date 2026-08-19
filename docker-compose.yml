@@ -53,7 +53,7 @@ services:
       # Internal (Docker containers): kafka:9092
       # External (host machine): localhost:9094
       KAFKA_ADVERTISED_LISTENERS: >
-        PLAINTEXT://kafka:9092,
+        PLAINTEXT://localhost:9092,
         EXTERNAL://localhost:9094
 
       # Maps listener names to their security protocols

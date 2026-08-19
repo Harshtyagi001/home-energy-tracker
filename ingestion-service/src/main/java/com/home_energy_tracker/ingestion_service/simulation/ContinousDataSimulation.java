@@ -32,10 +32,16 @@ public class ContinousDataSimulation implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         log.info("ContinousDataSimulation started...");
+        // Send an initial batch on startup so users see activity immediately in dev
+        try {
+            sendMockData();
+        } catch (Exception e) {
+            log.error("Initial simulation run failed: {}", e.getMessage());
+        }
     }
 
 
-    //@Scheduled(fixedRateString = "${simulation.interval-ms}")
+    @Scheduled(fixedRateString = "${simulation.interval-ms:5000}")
     public void sendMockData() {
         for (int i = 0; i < requestsPerInterval; i++) {
             EnergyUsageDto dto = new EnergyUsageDto(
